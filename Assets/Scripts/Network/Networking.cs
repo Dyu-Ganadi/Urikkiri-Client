@@ -13,6 +13,7 @@ namespace Network
     {
         private const string BaseUrl = "https://urikkiri-be.thinkinggms.com/";
         private static Networking _networking;
+        [SerializeField] private WebSocketClient websocketClient;
         [CanBeNull] public static string AccessToken;
 
         private string _password;
@@ -25,6 +26,13 @@ namespace Network
             if (_networking != null)
                 Destroy(_networking);
             _networking = this;
+        }
+
+        public void SetAccessToken(string accessToken)
+        {
+            AccessToken = accessToken;
+            Debug.Log($"토큰 정상 수신함: {accessToken}");
+            websocketClient.ConnectOn();
         }
 
         public abstract class Request<T> where T : class

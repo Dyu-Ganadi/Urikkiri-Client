@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NativeWebSocket;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +13,7 @@ namespace Network
     public class WebSocketClient : MonoBehaviour
     {
         private static WebSocket _websocket;
-        private const string ServerUrl = "wss://urikkiri-backend.thinkinggms.com/ws";
+        private const string ServerUrl = "ws://localhost:8080/ws";
 
         public bool IsConnected { get; private set; }
         public bool IsConnecting { get; private set; }
