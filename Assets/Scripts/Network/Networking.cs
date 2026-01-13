@@ -11,7 +11,7 @@ namespace Network
 {
     public class Networking : MonoBehaviour
     {
-        private const string BaseUrl = "https://urikkiri-be.thinkinggms.com/";
+        private const string BaseUrl = "https://localhost:8080/";
         private static Networking _networking;
         [SerializeField] private WebSocketClient websocketClient;
         [CanBeNull] public static string AccessToken;
