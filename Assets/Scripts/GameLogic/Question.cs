@@ -1,3 +1,5 @@
+using System;
+using Managers;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +15,11 @@ namespace GameLogic
         {
             Instance = this;
             questionText.text = question.Replace("{}", "___");
+        }
+
+        private void Update()
+        {
+            question = GameStatics.Question.content;
         }
 
         public void SetWord(string word)

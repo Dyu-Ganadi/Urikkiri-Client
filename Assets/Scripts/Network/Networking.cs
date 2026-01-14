@@ -11,7 +11,7 @@ namespace Network
 {
     public class Networking : MonoBehaviour
     {
-        private const string BaseUrl = "https://localhost:8080/";
+        private const string BaseUrl = "https://urikkiri-be.thinkinggms.com/";
         private static Networking _networking;
         [SerializeField] private WebSocketClient websocketClient;
         [CanBeNull] public static string AccessToken;
@@ -21,6 +21,9 @@ namespace Network
         private void Awake()
         {
             Application.runInBackground = true;
+            #if UNITY_EDITOR
+            SetAccessToken("eyJ0eXBlIjoiYWNjZXNzIiwiYWxnIjoiSFMyNTYifQ.eyJzdWIiOiJ1cmlra2lyaUB0aGlua2luZ2dtcy5jb20iLCJpYXQiOjE3NjgzNzQ0MjQsImV4cCI6MTc3MTk3NDQyNH0.pBKu0d_CaEY-sO-A1vJILDRSz49z-O8dCoOaxe7a-tA");
+            #endif
 
             // _baseUrl = baseUrl;
             if (_networking != null)

@@ -2,18 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Managers;
 using NativeWebSocket;
 using Newtonsoft.Json;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Network
 {
     public class WebSocketClient : MonoBehaviour
     {
         private static WebSocket _websocket;
-        private const string ServerUrl = "ws://localhost:8080/ws";
+        private const string ServerUrl = "wss://urikkiri-be.thinkinggms.com/ws";
 
         public bool IsConnected { get; private set; }
         public bool IsConnecting { get; private set; }
@@ -34,12 +33,7 @@ namespace Network
         {
             try
             {
-                if (pauseStatus)
-                {
-                    var command = new CommandMessage("game/lose", "Quit");
-                    await Message(JsonConvert.SerializeObject(command));
-                    await DisconnectAsync();
-                }
+                if (pauseStatus) await DisconnectAsync();
                 else ConnectOn();
             }
             catch (Exception e)
@@ -105,20 +99,32 @@ namespace Network
 #endif
         }
 
-        private void HandleMessage(string message)
+        private static void HandleMessage(string message)
         {
             Debug.Log($"Received message: {message}");
-            var command = JsonConvert.DeserializeObject<CommandMessage>(message);
-            switch (command.command)
+            var webSocketMessage = JsonConvert.DeserializeObject<WebSocketMessage>(message);
+            Debug.Log(webSocketMessage.message);
+            switch (webSocketMessage.type)
             {
-                case "match/matched":
-                    Debug.Log("matched");
-                    SceneManager.LoadScene("VersusScene");
+                case WebSocketMessageType.GAME_START:
+                    GameStatics.RoomCode = webSocketMessage.roomCode;
+                    GameFlowManager.Instance.GameStart(JsonConvert.DeserializeObject<GameStartData>(webSocketMessage.data));
+                    break;
+                case WebSocketMessageType.ALL_CARDS_SUBMITTED:
+                    Debug.Log("All Cards Submitted");
+                    break;
+                case WebSocketMessageType.SUBMIT_CARD:
+                default:
                     break;
             }
         }
 
-        public async Task Message(string message)
+        public static Task Message(object o)
+        {
+            return Message(JsonConvert.SerializeObject(o));
+        }
+
+        private static async Task Message(string message)
         {
             Debug.Log($"Send: {message}");
             if (_websocket.State == WebSocketState.Open)

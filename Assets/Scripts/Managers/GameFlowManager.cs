@@ -6,34 +6,33 @@ using Utils;
 
 namespace Managers
 {
-    public class GameFlowManager : MonoBehaviour, ICallHandler
+    public class GameFlowManager : SingleMono<GameFlowManager>, ICallHandler
     {
         public GameObject noticeCanvas;
         public GameObject gameCanvas;
         public GameObject resultCanvas;
 
-        private void Start()
+        public void GameStart(GameStartData gameStartData)
         {
-            API.GetRooms().OnResponse(response =>
-            {
-                GameStatics.RoomData = response;
-                noticeCanvas.SetActive(true);
-            }).Build();
+            GameStatics.Question = gameStartData.question;
+            GameStatics.Users = gameStartData.participants.ToArray();
+            API.GetMyData().OnResponse(res => GameStatics.MyUserId = res.id).Build();
+            noticeCanvas.SetActive(true);
         }
 
         private void LoadGame()
         {
             noticeCanvas.SetActive(false);
-            API.GetRooms().OnResponse(response =>
+            API.GetCards().OnResponse(response =>
             {
-                GameStatics.RoomData = response;
+                GameStatics.CardList = response;
                 gameCanvas.SetActive(true);
             }).Build();
         }
 
         public void SubmitCard(Card card)
         {
-            // API.SubmitCard(card);
+            API.SubmitCard(card);
         }
 
         public void HandleEvent(string eventName)

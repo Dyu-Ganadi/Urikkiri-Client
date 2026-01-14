@@ -1,19 +1,20 @@
 using System;
+using Managers;
 using TMPro;
 using UnityEngine;
 
 namespace GameLogic
 {
-    [ExecuteAlways]
     public class Card : MonoBehaviour
     {
+        public int index;
         public CardData cardData;
         public TextMeshProUGUI wordText;
         public TextMeshProUGUI meaningText;
 
-        [ExecuteAlways]
         private void Update()
         {
+            cardData = GameStatics.CardList.cards[index];
             wordText.text = cardData.word;
             meaningText.text = cardData.meaning;
         }
@@ -27,7 +28,7 @@ namespace GameLogic
     [Serializable]
     public class CardData
     {
-        public string cardId;
+        public long cardId;
         public string word;
         public string meaning;
     }
