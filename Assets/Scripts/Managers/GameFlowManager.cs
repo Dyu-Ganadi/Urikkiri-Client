@@ -1,4 +1,3 @@
-using System;
 using GameLogic;
 using Network;
 using UnityEngine;
@@ -23,11 +22,41 @@ namespace Managers
         private void LoadGame()
         {
             noticeCanvas.SetActive(false);
-            API.GetCards().OnResponse(response =>
+            if (GameStatics.IsExaminer())
             {
-                GameStatics.CardList = response;
                 gameCanvas.SetActive(true);
-            }).Build();
+            }
+            else
+            {
+                API.GetCards().OnResponse(response =>
+                {
+                    GameStatics.CardList = response;
+                    GameCanvasManager.CardReceivedAnimation();
+                    gameCanvas.SetActive(true);
+                }).Build();
+            }
+        }
+
+        public static void NextRound(NextRoundResponse data)
+        {
+            GameStatics.State = GameFlowState.CARD_SELECTION;
+            GameStatics.ResetExaminer();
+            GameStatics.GetParticipantInfo(data.newExaminerId).isExaminer = true;
+            GameStatics.Question.content = data.quiz.content;
+            GameStatics.Question.quizId = data.quiz.quizId;
+            Instance.gameCanvas.SetActive(false);
+            Instance.noticeCanvas.SetActive(true);
+        }
+
+        public static void RoundEnd()
+        {
+            Instance.gameCanvas.SetActive(false);
+            Instance.resultCanvas.SetActive(true);
+        }
+
+        public static void SetRoomCode(string code)
+        {
+            GameStatics.RoomCode = code;
         }
 
         public void SubmitCard(Card card)

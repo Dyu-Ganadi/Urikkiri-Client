@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GameLogic;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 
 namespace Network
 {
@@ -10,13 +11,14 @@ namespace Network
     public class Void
     {
     }
+
     [Serializable]
     public class GameStartData
     {
         public List<ParticipantInfo> participants;
         public QuizResponse question;
     }
-    
+
     [Serializable]
     public class ParticipantInfo
     {
@@ -24,8 +26,9 @@ namespace Network
         public string nickname;
         public int level;
         public bool isExaminer;
+        public int bananaScore;
     }
-    
+
     [Serializable]
     public class QuizResponse
     {
@@ -48,28 +51,62 @@ namespace Network
             return new SubmitCardRequest(data.cardId);
         }
     }
-    
+
     [Serializable]
     public class CardListResponse
     {
         public List<CardData> cards; // CardData == CardResponse
     }
-    
+
+    [Serializable]
+    public class ExaminerSelectRequest
+    {
+        public long participantId;
+
+        public ExaminerSelectRequest(long participantId)
+        {
+            this.participantId = participantId;
+        }
+
+        public static ExaminerSelectRequest From(CardData data)
+        {
+            return new ExaminerSelectRequest(data.participantId);
+        }
+    }
+
     [Serializable]
     public class MyPageResponse
     {
         public long id;
         public string email;
-        public string nickname; 
+        public string nickname;
         public int level;
         public int bananaxp;
     }
-    
+
+    [Serializable]
+    public class ExaminerSelectionDto
+    {
+        public long participantId;
+        public string cardWord;
+        public string winnerNickname;
+        public int newBananaScore;
+    }
+
+    [Serializable]
+    public class NextRoundResponse
+    {
+        public long newExaminerId;
+        public string newExaminerNickname;
+        public QuizResponse quiz;
+    }
+
     [Serializable]
     public class ErrorBody
     {
-        public int errorId;
+        public string status;
         public string message;
+        public string timestamp;
     }
 
     [Serializable]
@@ -107,14 +144,16 @@ namespace Network
         USER_JOINED,
         ROOM_EXIT,
 
-        GAME_START,
+        GAME_READY, // 4명 모임 → 게임 서버 연결 안내
+        CONNECT_GAME, // 클라이언트 → 게임 서버 연결 요청
+        GAME_START, // 게임 시작 (4명 모두 연결 완료 시, 질문 포함)
         SUBMIT_CARD,
         CARD_SUBMITTED,
         ALL_CARDS_SUBMITTED,
-        EXAMINER_SELECT,      // 출제자가 카드 선택
-        EXAMINER_SELECTED,    // 출제자 선택 완료
-        NEXT_ROUND,           // 다음 라운드 시작 (새 출제자 + 새 질문)
-        ROUND_END,            // 게임 종료 (5점 달성)
+        EXAMINER_SELECT, // 출제자가 카드 선택
+        EXAMINER_SELECTED, // 출제자 선택 완료
+        NEXT_ROUND, // 다음 라운드 시작 (새 출제자 + 새 질문)
+        ROUND_END, // 게임 종료 (5점 달성)
 
         ERROR
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Web;
 using JetBrains.Annotations;
+using Managers;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,7 +12,7 @@ namespace Network
 {
     public class Networking : MonoBehaviour
     {
-        private const string BaseUrl = "https://urikkiri-be.thinkinggms.com/";
+        private const string BaseUrl = "https://urikkiri-be.thinkinggms.com";
         private static Networking _networking;
         [SerializeField] private WebSocketClient websocketClient;
         [CanBeNull] public static string AccessToken;
@@ -22,7 +23,7 @@ namespace Network
         {
             Application.runInBackground = true;
             #if UNITY_EDITOR
-            SetAccessToken("eyJ0eXBlIjoiYWNjZXNzIiwiYWxnIjoiSFMyNTYifQ.eyJzdWIiOiJ1cmlra2lyaUB0aGlua2luZ2dtcy5jb20iLCJpYXQiOjE3NjgzNzQ0MjQsImV4cCI6MTc3MTk3NDQyNH0.pBKu0d_CaEY-sO-A1vJILDRSz49z-O8dCoOaxe7a-tA");
+            SetAccessToken("eyJ0eXBlIjoiYWNjZXNzIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJ1cmlra2lyaUB0aGlua2luZ2dtcy5jb20iLCJpYXQiOjE3Njg0MzYxNjUsImV4cCI6MTc2ODYxNjE2NX0.U9Vx5NJgRMN7AlC7o8SKN6_L2A1E_a9npNi0yTlscyNYnv6_WO_Kvzj1bmDj70vgHsWTO4W1aodjoJpsazrcNQ");
             #endif
 
             // _baseUrl = baseUrl;
@@ -94,7 +95,7 @@ namespace Network
                 webRequest.timeout = 15;
                 foreach (var (key, value) in _headers)
                     webRequest.SetRequestHeader(key, value);
-                if (AccessToken != null) webRequest.SetRequestHeader("Authorization", AccessToken);
+                if (AccessToken != null) webRequest.SetRequestHeader("Authorization", $"Bearer {AccessToken}");
                 yield return webRequest.SendWebRequest();
 
                 if (webRequest.downloadHandler == null) webRequest.downloadHandler = new DownloadHandlerBuffer();

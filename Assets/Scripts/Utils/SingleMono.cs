@@ -12,6 +12,7 @@ namespace Utils
             {
                 if (_instance) return _instance;
                 _instance = FindAnyObjectByType<T>();
+                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation 그렇게까지 비싸진 않을 것
                 if (!_instance) _instance = new GameObject(typeof(T).Name).AddComponent<T>();
                 return _instance;
             }

@@ -4,6 +4,7 @@ using GameLogic;
 using JetBrains.Annotations;
 using Managers;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Network
 {
@@ -21,7 +22,14 @@ namespace Network
 
         public static Task SubmitCard(Card card)
         {
-            return WebSocketClient.Message(new WebSocketRequestMessage(WebSocketMessageType.SUBMIT_CARD, GameStatics.RoomCode, SubmitCardRequest.From(card.cardData)));
+            return WebSocketClient.Message(GameStatics.IsExaminer()
+                ? new WebSocketRequestMessage(WebSocketMessageType.EXAMINER_SELECT, GameStatics.RoomCode, ExaminerSelectRequest.From(card.cardData))
+                : new WebSocketRequestMessage(WebSocketMessageType.SUBMIT_CARD, GameStatics.RoomCode, SubmitCardRequest.From(card.cardData)));
+        }
+
+        public static Task ConnectGame(string roomCode)
+        {
+            return WebSocketClient.Message(new WebSocketRequestMessage(WebSocketMessageType.CONNECT_GAME, roomCode, null));
         }
     }
 }

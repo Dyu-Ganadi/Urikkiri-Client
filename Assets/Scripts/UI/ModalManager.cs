@@ -11,7 +11,7 @@ namespace UI
         public void SetSubmitted(bool state) => Submitted = state;
         public Card currentCard;
         
-        public void UpdateCard(Card card) => currentCard.cardData = card.cardData;
+        public void UpdateCard(Card card) => currentCard.index = card.index;
 
         private void OnEnable()
         {

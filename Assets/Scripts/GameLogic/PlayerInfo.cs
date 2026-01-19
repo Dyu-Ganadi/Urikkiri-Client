@@ -15,10 +15,8 @@ namespace GameLogic
         private void Update()
         {
             var info = GameStatics.Users[index];
-            questioner.SetActive(false);
-            me.SetActive(false);
-            if (info.isExaminer) questioner.SetActive(true);
-            else if (info.userId == GameStatics.MyUserId) me.SetActive(true);
+            questioner.SetActive(info.isExaminer);
+            me.SetActive(info.IsSelfUser());
             playerName.text = info.nickname;
             playerLevel.text = info.level.ToString();
         }

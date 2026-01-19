@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Managers;
@@ -12,7 +13,7 @@ namespace Network
     public class WebSocketClient : MonoBehaviour
     {
         private static WebSocket _websocket;
-        private const string ServerUrl = "wss://urikkiri-be.thinkinggms.com/ws";
+        private const string ServerUrl = "wss://urikkiri-be.thinkinggms.com/ws?clientType=GAME";
 
         public bool IsConnected { get; private set; }
         public bool IsConnecting { get; private set; }
@@ -106,14 +107,28 @@ namespace Network
             Debug.Log(webSocketMessage.message);
             switch (webSocketMessage.type)
             {
+                case WebSocketMessageType.CONNECTED:
+                    API.ConnectGame(GameStatics.RoomCode);
+                    break;
                 case WebSocketMessageType.GAME_START:
                     GameStatics.RoomCode = webSocketMessage.roomCode;
                     GameFlowManager.Instance.GameStart(JsonConvert.DeserializeObject<GameStartData>(webSocketMessage.data));
                     break;
                 case WebSocketMessageType.ALL_CARDS_SUBMITTED:
-                    Debug.Log("All Cards Submitted");
+                    GameStatics.State = GameFlowState.EXAMINER_SELECTION;
+                    GameStatics.CardList = JsonConvert.DeserializeObject<CardListResponse>(webSocketMessage.data);
+                    GameCanvasManager.CardReceivedAnimation();
                     break;
-                case WebSocketMessageType.SUBMIT_CARD:
+                case WebSocketMessageType.EXAMINER_SELECTED:
+                    var data = JsonConvert.DeserializeObject<ExaminerSelectionDto>(webSocketMessage.data);
+                    GameStatics.GetParticipantInfo(data.participantId).bananaScore = data.newBananaScore;
+                    break;
+                case WebSocketMessageType.NEXT_ROUND:
+                    GameFlowManager.NextRound(JsonConvert.DeserializeObject<NextRoundResponse>(webSocketMessage.data));
+                    break;
+                case WebSocketMessageType.ROUND_END:
+                    GameFlowManager.RoundEnd();
+                    break;
                 default:
                     break;
             }

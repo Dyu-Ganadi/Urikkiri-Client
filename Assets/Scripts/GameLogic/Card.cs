@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using Managers;
 using TMPro;
 using UnityEngine;
@@ -31,5 +32,6 @@ namespace GameLogic
         public long cardId;
         public string word;
         public string meaning;
+        public long participantId;
     }
 }
