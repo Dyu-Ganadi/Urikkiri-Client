@@ -15,7 +15,6 @@ namespace Managers
         {
             GameStatics.Question = gameStartData.question;
             GameStatics.Users = gameStartData.participants.ToArray();
-            API.GetMyData().OnResponse(res => GameStatics.MyUserId = res.id).Build();
             noticeCanvas.SetActive(true);
         }
 
@@ -54,8 +53,10 @@ namespace Managers
             Instance.resultCanvas.SetActive(true);
         }
 
-        public static void SetRoomCode(string code)
+        // ReSharper disable once UnusedMember.Global
+        public void SetRoomCode(string code)
         {
+            Debug.Log($"룸코드 정상 수신함: {code}");
             GameStatics.RoomCode = code;
         }
 

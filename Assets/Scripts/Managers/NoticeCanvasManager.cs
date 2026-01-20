@@ -9,7 +9,7 @@ namespace Managers
         public TextMeshProUGUI noticeText;
         public TextMeshProUGUI descriptionText;
         
-        private void OnEnable()
+        private void Update()
         {
             _isExaminer = GameStatics.IsExaminer();
             noticeText.text = _isExaminer ? "당신은 <color #FF9B00>출제자</color> 입니다!" : "당신은 <color #FF9B00>플레이어</color> 입니다!";

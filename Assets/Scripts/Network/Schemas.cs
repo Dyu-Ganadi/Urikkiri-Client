@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GameLogic;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Unity.VisualScripting;
 
 namespace Network
@@ -110,29 +111,32 @@ namespace Network
     }
 
     [Serializable]
-    public class WebSocketRequestMessage
+    public class WebSocketRequestMessage<T>
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public WebSocketMessageType type;
         public string roomCode;
-        public string data;
+        public T data;
 
-        public WebSocketRequestMessage(WebSocketMessageType type, string roomCode, [CanBeNull] object data)
+        public WebSocketRequestMessage(WebSocketMessageType type, string roomCode, T data)
         {
             this.type = type;
             this.roomCode = roomCode;
-            this.data = JsonConvert.SerializeObject(data);
+            this.data = data;
         }
     }
 
     [Serializable]
-    public class WebSocketMessage
+    public class WebSocketMessage<T>
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public WebSocketMessageType type;
         public string roomCode;
-        public string data;
+        public T data;
         public string message;
     }
-
+    
+    [Serializable]
     public enum WebSocketMessageType
     {
         CONNECTED,

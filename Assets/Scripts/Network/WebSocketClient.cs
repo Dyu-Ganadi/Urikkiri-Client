@@ -49,10 +49,10 @@ namespace Network
 
             IsConnecting = true;
 
-            var dictionary = new Dictionary<string, string>();
-            if (!authToken.Equals("")) dictionary.Add("Authorization", $"Bearer {authToken}");
-
-            _websocket = new WebSocket(ServerUrl, dictionary);
+            var additional = "";
+            if (!authToken.Equals("")) additional = $"&token={authToken}";
+            
+            _websocket = new WebSocket(ServerUrl + additional);
 
             _websocket.OnOpen += () =>
             {
@@ -63,6 +63,7 @@ namespace Network
 
             _websocket.OnError += e =>
             {
+                Debug.Log(_websocket.State);
                 Debug.LogError($"Error: {e}");
                 IsConnected = false;
                 IsConnecting = false;
@@ -103,7 +104,7 @@ namespace Network
         private static void HandleMessage(string message)
         {
             Debug.Log($"Received message: {message}");
-            var webSocketMessage = JsonConvert.DeserializeObject<WebSocketMessage>(message);
+            var webSocketMessage = JsonConvert.DeserializeObject<WebSocketMessage<Void>>(message);
             Debug.Log(webSocketMessage.message);
             switch (webSocketMessage.type)
             {
@@ -112,19 +113,19 @@ namespace Network
                     break;
                 case WebSocketMessageType.GAME_START:
                     GameStatics.RoomCode = webSocketMessage.roomCode;
-                    GameFlowManager.Instance.GameStart(JsonConvert.DeserializeObject<GameStartData>(webSocketMessage.data));
+                    GameFlowManager.Instance.GameStart(JsonConvert.DeserializeObject<WebSocketMessage<GameStartData>>(message).data);
                     break;
                 case WebSocketMessageType.ALL_CARDS_SUBMITTED:
                     GameStatics.State = GameFlowState.EXAMINER_SELECTION;
-                    GameStatics.CardList = JsonConvert.DeserializeObject<CardListResponse>(webSocketMessage.data);
+                    GameStatics.CardList = JsonConvert.DeserializeObject<WebSocketMessage<CardListResponse>>(message).data;
                     GameCanvasManager.CardReceivedAnimation();
                     break;
                 case WebSocketMessageType.EXAMINER_SELECTED:
-                    var data = JsonConvert.DeserializeObject<ExaminerSelectionDto>(webSocketMessage.data);
-                    GameStatics.GetParticipantInfo(data.participantId).bananaScore = data.newBananaScore;
+                    var examinerSelectionDto = JsonConvert.DeserializeObject<WebSocketMessage<ExaminerSelectionDto>>(message).data;
+                    GameStatics.GetParticipantInfo(examinerSelectionDto.participantId).bananaScore = examinerSelectionDto.newBananaScore;
                     break;
                 case WebSocketMessageType.NEXT_ROUND:
-                    GameFlowManager.NextRound(JsonConvert.DeserializeObject<NextRoundResponse>(webSocketMessage.data));
+                    GameFlowManager.NextRound(JsonConvert.DeserializeObject<WebSocketMessage<NextRoundResponse>>(message).data);
                     break;
                 case WebSocketMessageType.ROUND_END:
                     GameFlowManager.RoundEnd();

@@ -23,13 +23,13 @@ namespace Network
         public static Task SubmitCard(Card card)
         {
             return WebSocketClient.Message(GameStatics.IsExaminer()
-                ? new WebSocketRequestMessage(WebSocketMessageType.EXAMINER_SELECT, GameStatics.RoomCode, ExaminerSelectRequest.From(card.cardData))
-                : new WebSocketRequestMessage(WebSocketMessageType.SUBMIT_CARD, GameStatics.RoomCode, SubmitCardRequest.From(card.cardData)));
+                ? new WebSocketRequestMessage<ExaminerSelectRequest>(WebSocketMessageType.EXAMINER_SELECT, GameStatics.RoomCode, ExaminerSelectRequest.From(card.cardData))
+                : new WebSocketRequestMessage<SubmitCardRequest>(WebSocketMessageType.SUBMIT_CARD, GameStatics.RoomCode, SubmitCardRequest.From(card.cardData)));
         }
 
         public static Task ConnectGame(string roomCode)
         {
-            return WebSocketClient.Message(new WebSocketRequestMessage(WebSocketMessageType.CONNECT_GAME, roomCode, null));
+            return WebSocketClient.Message(new WebSocketRequestMessage<Void>(WebSocketMessageType.CONNECT_GAME, roomCode, new Void()));
         }
     }
 }

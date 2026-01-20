@@ -19,23 +19,27 @@ namespace Network
 
         private string _password;
 
-        private void Awake()
+        private void Start()
         {
             Application.runInBackground = true;
-            #if UNITY_EDITOR
-            SetAccessToken("eyJ0eXBlIjoiYWNjZXNzIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJ1cmlra2lyaUB0aGlua2luZ2dtcy5jb20iLCJpYXQiOjE3Njg0MzYxNjUsImV4cCI6MTc2ODYxNjE2NX0.U9Vx5NJgRMN7AlC7o8SKN6_L2A1E_a9npNi0yTlscyNYnv6_WO_Kvzj1bmDj70vgHsWTO4W1aodjoJpsazrcNQ");
-            #endif
 
             // _baseUrl = baseUrl;
             if (_networking != null)
                 Destroy(_networking);
             _networking = this;
+            
+#if UNITY_EDITOR
+            GameFlowManager.Instance.SetRoomCode("825097");
+            SetAccessToken("eyJ0eXBlIjoiYWNjZXNzIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJtaW5kaW5nMjc5NkB0aGlua2luZ2dtcy5jb20iLCJpYXQiOjE3Njg4MjEwMTEsImV4cCI6MTc2OTAwMTAxMX0.wcf1R7UL1nC-AuaIUvipn4W8fajsFcfZWE5Egc5zufuvFS5_WCUzXZkHrrCD33IxNBwZkGCi1YfaO0SGMnifaw");
+#endif
         }
 
+        // ReSharper disable once UnusedMember.Global
         public void SetAccessToken(string accessToken)
         {
             AccessToken = accessToken;
             Debug.Log($"토큰 정상 수신함: {accessToken}");
+            API.GetMyData().OnResponse(res => GameStatics.MyUserId = res.id).Build();
             websocketClient.ConnectOn();
         }
 
