@@ -15,7 +15,7 @@ namespace GameLogic
         private void Update()
         {
             var info = GameStatics.Users[index];
-            questioner.SetActive(info.isExaminer);
+            questioner.SetActive(info.is_examiner);
             me.SetActive(info.IsSelfUser());
             playerName.text = info.nickname;
             playerLevel.text = info.level.ToString();

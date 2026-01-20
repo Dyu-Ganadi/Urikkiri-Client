@@ -14,22 +14,22 @@ namespace Managers
 
         public static bool IsExaminer()
         {
-            return Users.Any(participantInfo => participantInfo.isExaminer && participantInfo.userId == MyUserId);
+            return Users.Any(participantInfo => participantInfo.is_examiner && participantInfo.user_id == MyUserId);
         }
 
         public static void ResetExaminer()
         {
-            foreach (var participantInfo in Users) participantInfo.isExaminer = false;
+            foreach (var participantInfo in Users) participantInfo.is_examiner = false;
         }
 
         public static bool IsSelfUser(this ParticipantInfo user)
         {
-            return user.userId == MyUserId;
+            return user.user_id == MyUserId;
         }
 
         public static ParticipantInfo GetParticipantInfo(long userId)
         {
-            return Users.FirstOrDefault(participantInfo => participantInfo.userId == userId);
+            return Users.FirstOrDefault(participantInfo => participantInfo.user_id == userId);
         }
     }
 

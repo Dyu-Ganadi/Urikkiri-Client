@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Unity.VisualScripting;
+// ReSharper disable InconsistentNaming
 
 namespace Network
 {
@@ -23,11 +24,11 @@ namespace Network
     [Serializable]
     public class ParticipantInfo
     {
-        public long userId;
+        public long user_id;
         public string nickname;
         public int level;
-        public bool isExaminer;
-        public int bananaScore;
+        public bool is_examiner;
+        public int banana_score;
     }
 
     [Serializable]
@@ -88,17 +89,17 @@ namespace Network
     [Serializable]
     public class ExaminerSelectionDto
     {
-        public long participantId;
-        public string cardWord;
-        public string winnerNickname;
-        public int newBananaScore;
+        public long participant_id;
+        public string card_word;
+        public string winner_nickname;
+        public int new_banana_score;
     }
 
     [Serializable]
     public class NextRoundResponse
     {
-        public long newExaminerId;
-        public string newExaminerNickname;
+        public long new_examiner_id;
+        public string new_examiner_nickname;
         public QuizResponse quiz;
     }
 

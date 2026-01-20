@@ -17,10 +17,10 @@ namespace GameLogic
         private void Update()
         {
             var info = GameStatics.Users[index];
-            me.enabled = info.userId == GameStatics.MyUserId;
+            me.enabled = info.user_id == GameStatics.MyUserId;
             playerName.text = info.nickname;
-            playerScore.text = $"바나나 {info.bananaScore}개";
-            bananaImage.sprite = bananaSprites[info.bananaScore];
+            playerScore.text = $"바나나 {info.banana_score}개";
+            bananaImage.sprite = bananaSprites[info.banana_score];
         }
     }
 }
