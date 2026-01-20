@@ -15,6 +15,7 @@ namespace GameLogic
 
         private void Update()
         {
+            if (GameStatics.CardList == null || index >= GameStatics.CardList.cards.Count) return;
             cardData = GameStatics.CardList.cards[index];
             wordText.text = cardData.word;
             meaningText.text = cardData.meaning;
@@ -29,9 +30,11 @@ namespace GameLogic
     [Serializable]
     public class CardData
     {
-        public long cardId;
+        // ReSharper disable InconsistentNaming
+        public long card_id;
         public string word;
         public string meaning;
-        public long participantId;
+        public long participant_id;
+        // ReSharper restore InconsistentNaming
     }
 }

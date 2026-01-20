@@ -34,7 +34,7 @@ namespace Network
     [Serializable]
     public class QuizResponse
     {
-        public long quizId;
+        public long quiz_id;
         public string content;
     }
 
@@ -50,7 +50,7 @@ namespace Network
 
         public static SubmitCardRequest From(CardData data)
         {
-            return new SubmitCardRequest(data.cardId);
+            return new SubmitCardRequest(data.card_id);
         }
     }
 
@@ -72,7 +72,7 @@ namespace Network
 
         public static ExaminerSelectRequest From(CardData data)
         {
-            return new ExaminerSelectRequest(data.participantId);
+            return new ExaminerSelectRequest(data.participant_id);
         }
     }
 

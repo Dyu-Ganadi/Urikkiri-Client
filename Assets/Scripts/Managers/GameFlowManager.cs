@@ -1,5 +1,6 @@
 using GameLogic;
 using Network;
+using Newtonsoft.Json;
 using UnityEngine;
 using Utils;
 
@@ -14,6 +15,7 @@ namespace Managers
         public void GameStart(GameStartData gameStartData)
         {
             GameStatics.Question = gameStartData.question;
+            Question.Instance.SetWord("___");
             GameStatics.Users = gameStartData.participants.ToArray();
             noticeCanvas.SetActive(true);
         }
@@ -42,7 +44,7 @@ namespace Managers
             GameStatics.ResetExaminer();
             GameStatics.GetParticipantInfo(data.new_examiner_id).is_examiner = true;
             GameStatics.Question.content = data.quiz.content;
-            GameStatics.Question.quizId = data.quiz.quizId;
+            GameStatics.Question.quiz_id = data.quiz.quiz_id;
             Instance.gameCanvas.SetActive(false);
             Instance.noticeCanvas.SetActive(true);
         }
