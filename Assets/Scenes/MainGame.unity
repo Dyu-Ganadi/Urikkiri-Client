@@ -6965,6 +6965,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1834751496609367069, guid: c42743d06ced65f4c96a23faea07bf38, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1834751496609367069, guid: c42743d06ced65f4c96a23faea07bf38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3713938113608993013, guid: c42743d06ced65f4c96a23faea07bf38, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

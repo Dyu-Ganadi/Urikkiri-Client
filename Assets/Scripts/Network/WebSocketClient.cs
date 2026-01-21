@@ -130,7 +130,7 @@ namespace Network
                     break;
                 case WebSocketMessageType.EXAMINER_SELECTED:
                     var examinerSelectionDto = JsonConvert.DeserializeObject<WebSocketMessage<ExaminerSelectionDto>>(message).data;
-                    GameStatics.GetParticipantInfo(examinerSelectionDto.participant_id).banana_score = examinerSelectionDto.new_banana_score;
+                    GameStatics.GetParticipantInfo(examinerSelectionDto.user_id).banana_score = examinerSelectionDto.new_banana_score;
                     break;
                 case WebSocketMessageType.NEXT_ROUND:
                     GameFlowManager.NextRound(JsonConvert.DeserializeObject<WebSocketMessage<NextRoundResponse>>(message).data);

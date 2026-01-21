@@ -105,7 +105,7 @@ namespace Network
     [Serializable]
     public class ExaminerSelectionDto
     {
-        public long participant_id;
+        public long user_id;
         public string card_word;
         public string winner_nickname;
         public int new_banana_score;
