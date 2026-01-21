@@ -10,6 +10,7 @@ namespace Managers
         public static QuizResponse Question;
         public static CardListResponse CardList;
         public static ParticipantInfo[] Users;
+        public static PlayerRankInfo[] FinalScore;
         public static GameFlowState State = GameFlowState.CARD_SELECTION;
 
         public static bool IsExaminer()

@@ -32,6 +32,21 @@ namespace Network
     }
 
     [Serializable]
+    public class PlayerRankInfo
+    {
+        public int rank;
+        public string nickname;
+        public int level;
+        public int banana_score;
+    }
+
+    [Serializable]
+    public class GameResultDto
+    {
+        public List<PlayerRankInfo> rankings;
+    }
+
+    [Serializable]
     public class QuizResponse
     {
         public long quiz_id;

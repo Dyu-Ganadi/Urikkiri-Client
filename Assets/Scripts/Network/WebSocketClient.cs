@@ -128,6 +128,8 @@ namespace Network
                     GameFlowManager.NextRound(JsonConvert.DeserializeObject<WebSocketMessage<NextRoundResponse>>(message).data);
                     break;
                 case WebSocketMessageType.ROUND_END:
+                    GameStatics.FinalScore = JsonConvert.DeserializeObject<WebSocketMessage<GameResultDto>>(message).data.rankings.ToArray();
+                    Array.Sort(GameStatics.FinalScore, (a, b) => b.rank.CompareTo(a.rank));
                     GameFlowManager.RoundEnd();
                     break;
                 default:
