@@ -131,13 +131,13 @@ namespace Network
     {
         [JsonConverter(typeof(StringEnumConverter))]
         public WebSocketMessageType type;
-        public string roomCode;
+        public string room_code;
         public T data;
 
-        public WebSocketRequestMessage(WebSocketMessageType type, string roomCode, T data)
+        public WebSocketRequestMessage(WebSocketMessageType type, string room_code, T data)
         {
             this.type = type;
-            this.roomCode = roomCode;
+            this.room_code = room_code;
             this.data = data;
         }
     }
@@ -147,7 +147,7 @@ namespace Network
     {
         [JsonConverter(typeof(StringEnumConverter))]
         public WebSocketMessageType type;
-        public string roomCode;
+        public string room_code;
         public T data;
         public string message;
     }

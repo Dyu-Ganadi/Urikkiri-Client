@@ -112,7 +112,7 @@ namespace Network
                     API.ConnectGame(GameStatics.RoomCode);
                     break;
                 case WebSocketMessageType.GAME_START:
-                    GameStatics.RoomCode = webSocketMessage.roomCode;
+                    GameStatics.RoomCode = webSocketMessage.room_code;
                     GameFlowManager.Instance.GameStart(JsonConvert.DeserializeObject<WebSocketMessage<GameStartData>>(message).data);
                     break;
                 case WebSocketMessageType.ALL_CARDS_SUBMITTED:
