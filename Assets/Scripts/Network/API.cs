@@ -1,10 +1,6 @@
-using System;
 using System.Threading.Tasks;
 using GameLogic;
-using JetBrains.Annotations;
 using Managers;
-using Newtonsoft.Json;
-using UnityEngine;
 
 namespace Network
 {
@@ -18,6 +14,11 @@ namespace Network
         public static Networking.Get<MyPageResponse> GetMyData()
         {
             return new Networking.Get<MyPageResponse>("/users/my");
+        }
+
+        public static void TimeOver()
+        {
+            
         }
 
         public static Task SubmitCard(Card card)

@@ -1,4 +1,5 @@
 using System;
+using UI;
 using UnityEngine;
 using Utils;
 
@@ -9,6 +10,11 @@ namespace Managers
         private static readonly int CardReceived = Animator.StringToHash("card_received");
         public static bool Received;
         public Animator animator;
+
+        private void OnEnable()
+        {
+            ModalManager.Submitted = false;
+        }
 
         private void Update()
         {

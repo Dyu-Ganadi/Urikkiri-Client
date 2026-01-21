@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Network;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +17,11 @@ namespace UI
         public Animator animator;
 
         private Coroutine _timer;
+
+        private void OnEnable()
+        {
+            animator.enabled = true;
+        }
 
         private void Update()
         {
@@ -37,7 +44,9 @@ namespace UI
                 currentTime -= Time.deltaTime;
                 yield return null;
             }
+            API.TimeOver();
             _timer = null;
+            gameObject.SetActive(false);
         }
 
         public void HandleEvent(string eventName)

@@ -703,10 +703,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c27b271d448a7b43b897b8da3f2ed66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameLogic.Card
+  animator: {fileID: 6943095004834024853}
   index: 0
+  flipped: 0
   cardData:
-    cardId: 0
+    card_id: 0
     word: 
     meaning: 
+    participant_id: 0
   wordText: {fileID: 7166983656670179171}
   meaningText: {fileID: 5921998614941922110}

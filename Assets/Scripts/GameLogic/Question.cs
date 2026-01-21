@@ -16,6 +16,10 @@ namespace GameLogic
         private void Start()
         {
             Instance = this;
+        }
+
+        private void OnEnable()
+        {
             SetWord("___");
         }
 
