@@ -11,16 +11,18 @@ namespace GameLogic
         public string question;
         public TextMeshProUGUI questionText;
         public TextMeshProUGUI descriptionText;
+        private string _word;
 
         private void Start()
         {
             Instance = this;
-            questionText.text = question.Replace("{}", "___");
+            _word = "___";
         }
 
         private void Update()
         {
             question = GameStatics.Question.content;
+            questionText.text = question.Replace("{}", _word);
             descriptionText.text = GameStatics.IsExaminer()
                 ? GameStatics.State.Equals(GameFlowState.CARD_SELECTION)
                     ? "당신은 출제자! 플레이어들이 카드를 고르고 있어요"
@@ -32,7 +34,7 @@ namespace GameLogic
 
         public void SetWord(string word)
         {
-            questionText.text = question.Replace("{}", word);
+            _word = word;
         }
     }
 }
