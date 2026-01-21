@@ -41,11 +41,11 @@ namespace Network
     [Serializable]
     public class SubmitCardRequest
     {
-        public long cardId;
+        public long card_id;
 
         public SubmitCardRequest(long cardId)
         {
-            this.cardId = cardId;
+            this.card_id = cardId;
         }
 
         public static SubmitCardRequest From(CardData data)
@@ -63,11 +63,11 @@ namespace Network
     [Serializable]
     public class ExaminerSelectRequest
     {
-        public long participantId;
+        public long participant_id;
 
         public ExaminerSelectRequest(long participantId)
         {
-            this.participantId = participantId;
+            this.participant_id = participantId;
         }
 
         public static ExaminerSelectRequest From(CardData data)
