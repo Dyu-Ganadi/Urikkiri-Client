@@ -23,16 +23,14 @@ namespace Managers
         private void LoadGame()
         {
             noticeCanvas.SetActive(false);
-            if (GameStatics.IsExaminer())
-            {
-                gameCanvas.SetActive(true);
-            }
+            GameCanvasManager.Received = false;
+            if (GameStatics.IsExaminer()) gameCanvas.SetActive(true);
             else
             {
                 API.GetCards().OnResponse(response =>
                 {
                     GameStatics.CardList = response;
-                    GameCanvasManager.CardReceivedAnimation();
+                    GameCanvasManager.Received = true;
                     gameCanvas.SetActive(true);
                 }).Build();
             }

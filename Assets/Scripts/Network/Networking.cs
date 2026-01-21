@@ -19,7 +19,7 @@ namespace Network
 
         private string _password;
 
-        private void Start()
+        private void Awake()
         {
             Application.runInBackground = true;
 
@@ -27,11 +27,6 @@ namespace Network
             if (_networking != null)
                 Destroy(_networking);
             _networking = this;
-            
-#if UNITY_EDITOR
-            GameFlowManager.Instance.SetRoomCode("973495");
-            SetAccessToken("eyJ0eXBlIjoiYWNjZXNzIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJtaW5kaW5nMjc5NkB0aGlua2luZ2dtcy5jb20iLCJpYXQiOjE3Njg4MjEwMTEsImV4cCI6MTc2OTAwMTAxMX0.wcf1R7UL1nC-AuaIUvipn4W8fajsFcfZWE5Egc5zufuvFS5_WCUzXZkHrrCD33IxNBwZkGCi1YfaO0SGMnifaw");
-#endif
         }
 
         // ReSharper disable once UnusedMember.Global

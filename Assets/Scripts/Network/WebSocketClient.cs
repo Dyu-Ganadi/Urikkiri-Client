@@ -118,7 +118,7 @@ namespace Network
                 case WebSocketMessageType.ALL_CARDS_SUBMITTED:
                     GameStatics.State = GameFlowState.EXAMINER_SELECTION;
                     GameStatics.CardList = JsonConvert.DeserializeObject<WebSocketMessage<CardListResponse>>(message).data;
-                    GameCanvasManager.CardReceivedAnimation();
+                    GameCanvasManager.Received = true;
                     break;
                 case WebSocketMessageType.EXAMINER_SELECTED:
                     var examinerSelectionDto = JsonConvert.DeserializeObject<WebSocketMessage<ExaminerSelectionDto>>(message).data;
