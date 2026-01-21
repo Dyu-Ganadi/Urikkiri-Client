@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLogic;
 using Managers;
 using NativeWebSocket;
 using Newtonsoft.Json;
@@ -104,7 +105,7 @@ namespace Network
         private static void HandleMessage(string message)
         {
             Debug.Log($"Received message: {message}");
-            var webSocketMessage = JsonConvert.DeserializeObject<WebSocketMessage<Void>>(message);
+            var webSocketMessage = JsonConvert.DeserializeObject<WebSocketMessage<object>>(message);
             Debug.Log(webSocketMessage.message);
             switch (webSocketMessage.type)
             {
@@ -117,7 +118,10 @@ namespace Network
                     break;
                 case WebSocketMessageType.ALL_CARDS_SUBMITTED:
                     GameStatics.State = GameFlowState.EXAMINER_SELECTION;
-                    GameStatics.CardList = JsonConvert.DeserializeObject<WebSocketMessage<CardListResponse>>(message).data;
+                    GameStatics.CardList = new CardListResponse
+                    {
+                        cards = JsonConvert.DeserializeObject<WebSocketMessage<List<CardData>>>(message).data
+                    };
                     GameCanvasManager.Received = true;
                     break;
                 case WebSocketMessageType.EXAMINER_SELECTED:
