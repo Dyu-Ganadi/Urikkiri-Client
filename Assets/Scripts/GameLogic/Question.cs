@@ -16,7 +16,7 @@ namespace GameLogic
         private void Start()
         {
             Instance = this;
-            _word = "___";
+            SetWord("___");
         }
 
         private void Update()
