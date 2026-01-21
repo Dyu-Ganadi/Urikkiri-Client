@@ -32,5 +32,10 @@ namespace Network
         {
             return WebSocketClient.Message(new WebSocketRequestMessage<Void>(WebSocketMessageType.CONNECT_GAME, roomCode, new Void()));
         }
+
+        public static Task LeaveRoom(string roomCode)
+        {
+            return WebSocketClient.Message(new WebSocketRequestMessage<Void>(WebSocketMessageType.LEAVE_ROOM, roomCode, new Void()));
+        }
     }
 }

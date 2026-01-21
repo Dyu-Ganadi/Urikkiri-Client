@@ -40,6 +40,7 @@ namespace Managers
         {
             GameStatics.State = GameFlowState.CARD_SELECTION;
             GameStatics.ResetExaminer();
+            GameStatics.ResetSubmitted();
             GameStatics.GetParticipantInfo(data.new_examiner_id).is_examiner = true;
             GameStatics.Question.content = data.quiz.content;
             GameStatics.Question.quiz_id = data.quiz.quiz_id;
@@ -63,6 +64,11 @@ namespace Managers
         public void SubmitCard(Card card)
         {
             API.SubmitCard(card);
+        }
+
+        public void LeaveRoom()
+        {
+            API.LeaveRoom(GameStatics.RoomCode);
         }
 
         public void HandleEvent(string eventName)

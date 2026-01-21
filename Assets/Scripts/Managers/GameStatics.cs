@@ -23,6 +23,11 @@ namespace Managers
             foreach (var participantInfo in Users) participantInfo.is_examiner = false;
         }
 
+        public static void ResetSubmitted()
+        {
+            foreach (var participantInfo in Users) participantInfo.card_submitted = false;
+        }
+
         public static bool IsSelfUser(this ParticipantInfo user)
         {
             return user.user_id == MyUserId;

@@ -838,3 +838,4 @@ MonoBehaviour:
   playerLevel: {fileID: 4222542322639464406}
   questioner: {fileID: 1476754726108701023}
   me: {fileID: 1601886265418970405}
+  cardSubmitted: {fileID: 1834751496609367069}

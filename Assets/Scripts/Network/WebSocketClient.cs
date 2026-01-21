@@ -116,6 +116,10 @@ namespace Network
                     GameStatics.RoomCode = webSocketMessage.room_code;
                     GameFlowManager.Instance.GameStart(JsonConvert.DeserializeObject<WebSocketMessage<GameStartData>>(message).data);
                     break;
+                case WebSocketMessageType.CARD_SUBMITTED:
+                    var cardData = JsonConvert.DeserializeObject<WebSocketMessage<CardData>>(message).data;
+                    GameStatics.GetParticipantInfo(cardData.participant_id).card_submitted = true;
+                    break;
                 case WebSocketMessageType.ALL_CARDS_SUBMITTED:
                     GameStatics.State = GameFlowState.EXAMINER_SELECTION;
                     GameStatics.CardList = new CardListResponse
@@ -133,7 +137,7 @@ namespace Network
                     break;
                 case WebSocketMessageType.ROUND_END:
                     GameStatics.FinalScore = JsonConvert.DeserializeObject<WebSocketMessage<GameResultDto>>(message).data.rankings.ToArray();
-                    Array.Sort(GameStatics.FinalScore, (a, b) => b.rank.CompareTo(a.rank));
+                    Array.Sort(GameStatics.FinalScore, (a, b) => a.rank.CompareTo(b.rank));
                     GameFlowManager.RoundEnd();
                     break;
                 default:

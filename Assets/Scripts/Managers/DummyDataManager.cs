@@ -51,6 +51,10 @@ namespace Managers
                 };
                 GameCanvasManager.Received = true;
             }));
+            StartCoroutine(Delay(7f, () =>
+            {
+                GameStatics.GetParticipantInfo(1);
+            }));
 #endif
         }
 
