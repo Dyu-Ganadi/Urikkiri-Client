@@ -16,11 +16,6 @@ namespace Network
             return new Networking.Get<MyPageResponse>("/users/my");
         }
 
-        public static void TimeOver()
-        {
-            
-        }
-
         public static Task SubmitCard(Card card)
         {
             return WebSocketClient.Message(GameStatics.IsExaminer()
@@ -36,6 +31,11 @@ namespace Network
         public static Task LeaveRoom(string roomCode)
         {
             return WebSocketClient.Message(new WebSocketRequestMessage<Void>(WebSocketMessageType.LEAVE_ROOM, roomCode, new Void()));
+        }
+
+        public static Task SendKeepAlive(string roomCode)
+        {
+            return WebSocketClient.Message(new WebSocketRequestMessage<Void>(WebSocketMessageType.KEEPALIVE, roomCode, new Void()));
         }
     }
 }

@@ -160,6 +160,8 @@ namespace Network
     {
         CONNECTED,
 
+        KEEPALIVE,
+
         CREATE_ROOM,
         ROOM_CREATED,
         JOIN_ROOM,

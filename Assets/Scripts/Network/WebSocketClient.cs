@@ -145,6 +145,9 @@ namespace Network
                     Array.Sort(GameStatics.FinalScore, (a, b) => a.rank.CompareTo(b.rank));
                     GameFlowManager.RoundEnd();
                     break;
+                case WebSocketMessageType.KEEPALIVE:
+                    API.SendKeepAlive(GameStatics.RoomCode);
+                    break;
                 default:
                     break;
             }
