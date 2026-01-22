@@ -47,7 +47,6 @@ namespace Managers
             yield return new WaitForSeconds(4f);
             GameStatics.State = GameFlowState.CARD_SELECTION;
             GameStatics.ResetExaminer();
-            GameStatics.ResetSubmitted();
             GameStatics.GetParticipantInfo(data.new_examiner_id).is_examiner = true;
             GameStatics.Question.content = data.quiz.content;
             GameStatics.Question.quiz_id = data.quiz.quiz_id;
@@ -57,6 +56,12 @@ namespace Managers
 
         public static void RoundEnd()
         {
+            Instance.StartCoroutine(RoundEndFlow());
+        }
+
+        private static IEnumerator RoundEndFlow()
+        {
+            yield return new WaitForSeconds(4f);
             Instance.gameCanvas.SetActive(false);
             Instance.resultCanvas.SetActive(true);
         }

@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 8403847073166172294}
   - component: {fileID: 2276630437445550723}
   - component: {fileID: 7722754271911736164}
+  - component: {fileID: 6004619894537766677}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -287,6 +288,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6004619894537766677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834751496609367069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e2869a0df5f41468dc4d8bfeeee284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.MiniCardAnimationEventHandler
 --- !u!1 &3932042202671708935
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,4 +851,4 @@ MonoBehaviour:
   playerLevel: {fileID: 4222542322639464406}
   questioner: {fileID: 1476754726108701023}
   me: {fileID: 1601886265418970405}
-  cardSubmitted: {fileID: 1834751496609367069}
+  cardAnimator: {fileID: 7722754271911736164}

@@ -32,6 +32,7 @@ namespace Managers
                     user_id = i + 5,
                     banana_score = 0,
                     is_examiner = false,
+                    card_submitted = true,
                     level = 0,
                     nickname = "유저" + i
                 };
@@ -55,6 +56,7 @@ namespace Managers
                     new_banana_score = 2
                 };
                 GameStatics.SelectionInfo = examinerSelectionDto;
+                GameStatics.ResetSubmitted();
                 GameStatics.State = GameFlowState.EXAMINER_SELECTED;
                 GameStatics.CardList.cards[0] = examinerSelectionDto.selected_card;
                 GameStatics.GetParticipantInfo(examinerSelectionDto.user_id).banana_score = examinerSelectionDto.new_banana_score;

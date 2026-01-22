@@ -134,6 +134,7 @@ namespace Network
                     GameStatics.State = GameFlowState.EXAMINER_SELECTED;
                     GameStatics.CardList.cards[0] = examinerSelectionDto.selected_card;
                     GameStatics.GetParticipantInfo(examinerSelectionDto.user_id).banana_score = examinerSelectionDto.new_banana_score;
+                    GameStatics.ResetSubmitted();
                     Question.Instance.SetWord(examinerSelectionDto.selected_card.word);
                     GameCanvasManager.Selected = true;
                     break;
