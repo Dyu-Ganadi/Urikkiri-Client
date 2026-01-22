@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using GameLogic;
 using Network;
-using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Managers
@@ -40,6 +39,28 @@ namespace Managers
                 gs.participants.Add(user);
             }
             StartCoroutine(Delay(1f, () => GameFlowManager.Instance.GameStart(gs)));
+            StartCoroutine(Delay(10f, () =>
+            {
+                Debug.Log("examiner selected");
+                var examinerSelectionDto = new ExaminerSelectionDto
+                {
+                    user_id = 5,
+                    selected_card = new CardData
+                    {
+                        card_id = 1,
+                        meaning = "흐헤헤",
+                        word = "즐겁다는 뜻이다"
+                    },
+                    winner_nickname = "우?끾끼",
+                    new_banana_score = 2
+                };
+                GameStatics.SelectionInfo = examinerSelectionDto;
+                GameStatics.State = GameFlowState.EXAMINER_SELECTED;
+                GameStatics.CardList.cards[0] = examinerSelectionDto.selected_card;
+                GameStatics.GetParticipantInfo(examinerSelectionDto.user_id).banana_score = examinerSelectionDto.new_banana_score;
+                Question.Instance.SetWord(examinerSelectionDto.selected_card.word);
+                GameCanvasManager.Selected = true;
+            }));
 #endif
         }
 

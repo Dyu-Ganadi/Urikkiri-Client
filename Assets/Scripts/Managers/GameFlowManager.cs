@@ -1,6 +1,6 @@
+using System.Collections;
 using GameLogic;
 using Network;
-using Newtonsoft.Json;
 using UnityEngine;
 using Utils;
 
@@ -24,6 +24,7 @@ namespace Managers
         {
             noticeCanvas.SetActive(false);
             GameCanvasManager.Received = false;
+            GameCanvasManager.Selected = false;
             if (GameStatics.IsExaminer()) gameCanvas.SetActive(true);
             else
             {
@@ -38,6 +39,12 @@ namespace Managers
 
         public static void NextRound(NextRoundResponse data)
         {
+            Instance.StartCoroutine(NextRoundFlow(data));
+        }
+
+        private static IEnumerator NextRoundFlow(NextRoundResponse data)
+        {
+            yield return new WaitForSeconds(4f);
             GameStatics.State = GameFlowState.CARD_SELECTION;
             GameStatics.ResetExaminer();
             GameStatics.ResetSubmitted();
@@ -76,6 +83,8 @@ namespace Managers
             switch (eventName)
             {
                 case "game_load": LoadGame();
+                    break;
+                case "select_examiner":
                     break;
             }
         }

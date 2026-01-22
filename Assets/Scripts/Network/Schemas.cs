@@ -5,6 +5,8 @@ using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Unity.VisualScripting;
+using UnityEngine.Serialization;
+
 // ReSharper disable InconsistentNaming
 
 namespace Network
@@ -106,7 +108,7 @@ namespace Network
     public class ExaminerSelectionDto
     {
         public long user_id;
-        public string card_word;
+        public CardData selected_card;
         public string winner_nickname;
         public int new_banana_score;
     }

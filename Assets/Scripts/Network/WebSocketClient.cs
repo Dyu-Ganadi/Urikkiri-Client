@@ -130,7 +130,12 @@ namespace Network
                     break;
                 case WebSocketMessageType.EXAMINER_SELECTED:
                     var examinerSelectionDto = JsonConvert.DeserializeObject<WebSocketMessage<ExaminerSelectionDto>>(message).data;
+                    GameStatics.SelectionInfo = examinerSelectionDto;
+                    GameStatics.State = GameFlowState.EXAMINER_SELECTED;
+                    GameStatics.CardList.cards[0] = examinerSelectionDto.selected_card;
                     GameStatics.GetParticipantInfo(examinerSelectionDto.user_id).banana_score = examinerSelectionDto.new_banana_score;
+                    Question.Instance.SetWord(examinerSelectionDto.selected_card.word);
+                    GameCanvasManager.Selected = true;
                     break;
                 case WebSocketMessageType.NEXT_ROUND:
                     GameFlowManager.NextRound(JsonConvert.DeserializeObject<WebSocketMessage<NextRoundResponse>>(message).data);

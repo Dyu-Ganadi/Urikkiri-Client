@@ -9,6 +9,7 @@ namespace GameLogic
     {
         public static Question Instance { get; private set; }
         public string question;
+        public TextMeshProUGUI qa;
         public TextMeshProUGUI questionText;
         public TextMeshProUGUI descriptionText;
         private string _word;
@@ -26,6 +27,14 @@ namespace GameLogic
         private void Update()
         {
             question = GameStatics.Question.content;
+            if (GameStatics.State.Equals(GameFlowState.EXAMINER_SELECTED))
+            {
+                qa.text = "선택된 카드";
+                questionText.text = question.Replace("{}", $"<color #FF9B00>{_word}</color>");
+                descriptionText.text = $"{GameStatics.SelectionInfo.winner_nickname}의 카드가 출제자의 마음을 울렸다!!";
+                return;
+            }
+            qa.text = "문제";
             questionText.text = question.Replace("{}", _word);
             descriptionText.text = GameStatics.IsExaminer()
                 ? GameStatics.State.Equals(GameFlowState.CARD_SELECTION)
