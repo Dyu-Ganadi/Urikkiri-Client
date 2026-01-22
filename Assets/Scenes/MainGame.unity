@@ -6927,6 +6927,57 @@ MonoBehaviour:
   timeBar: {fileID: 21169118}
   timeText: {fileID: 466314824}
   animator: {fileID: 2136885446}
+  onTimeOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1580568189}
+        m_TargetAssemblyTypeName: GameLogic.Question, Assembly-CSharp
+        m_MethodName: SetWord
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ___
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8937054977810600013}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: close
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8937054977810600012}
+        m_TargetAssemblyTypeName: UI.ModalManager, Assembly-CSharp
+        m_MethodName: SetSubmitted
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1692618766}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: submit_card
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &2136885446
 Animator:
   serializedVersion: 7
@@ -7903,7 +7954,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 6
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
@@ -7912,15 +7967,15 @@ PrefabInstance:
     - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1692618766}
     - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1692618766}
+      objectReference: {fileID: 971468833}
     - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
-      objectReference: {fileID: 971468833}
+      objectReference: {fileID: 1290679457}
     - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
@@ -7930,17 +7985,54 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: set_text
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: SubmitCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
       value: SubmitCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: Managers.GameFlowManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
       value: Managers.GameFlowManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
+      value: submit_card
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
+      value: "\uB2E4\uB978 \uC0AC\uB78C\uB4E4\uC774 \uCE74\uB4DC\uB97C \uACE0\uB974\uAE38
+        \uAE30\uB2E4\uB824\uC694"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1775286125}
+    - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1775286125}
+    - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: GameLogic.Card, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6861590301701389718, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: GameLogic.Card, Assembly-CSharp
@@ -8017,6 +8109,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51300bb5a59c9c345a5740f3a6dcfe13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModalManager
+--- !u!95 &8937054977810600013 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4364367185016511282, guid: 5a22dbef718df794683fcd69e1e00b76, type: 3}
+  m_PrefabInstance: {fileID: 8937054977810600010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

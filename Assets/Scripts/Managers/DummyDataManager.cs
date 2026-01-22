@@ -16,7 +16,7 @@ namespace Managers
 #if UNITY_EDITOR
             // 더미 데이터
             GameFlowManager.Instance.SetRoomCode("973495");
-            networking.SetAccessToken("eyJ0eXBlIjoiYWNjZXNzIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJtaW5kaW5nMjc5NkB0aGlua2luZ2dtcy5jb20iLCJpYXQiOjE3Njg4MjEwMTEsImV4cCI6MTc2OTAwMTAxMX0.wcf1R7UL1nC-AuaIUvipn4W8fajsFcfZWE5Egc5zufuvFS5_WCUzXZkHrrCD33IxNBwZkGCi1YfaO0SGMnifaw");
+            networking.SetAccessToken("eyJ0eXBlIjoiYWNjZXNzIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJ1cmlra2lyaUB0aGlua2luZ2dtcy5jb20iLCJpYXQiOjE3NjkwNDg2MTEsImV4cCI6MTc2OTIyODYxMX0.kfy_MalLortR7PK3ou-PhzzagtVm-oj6Coxnjs4sO0uxyFuh2ubVmL6DvsUdqdsa39zTFT4VwNAmvxIe1BRpQg");
             var gs = new GameStartData
             {
                 participants = new List<ParticipantInfo>(),
@@ -40,21 +40,6 @@ namespace Managers
                 gs.participants.Add(user);
             }
             StartCoroutine(Delay(1f, () => GameFlowManager.Instance.GameStart(gs)));
-            StartCoroutine(Delay(4f, () =>
-            {
-                var message = "{\"type\":\"ALL_CARDS_SUBMITTED\",\"room_code\":\"333977\",\"data\":[{\"participant_id\":336,\"nickname\":\"수아\",\"card_id\":100,\"word\":\"성금\",\"meaning\":\"말이나 일의 보람이나 효력. 꼭 지켜야 할 명령.\"},{\"participant_id\":335,\"nickname\":\"아임소희\",\"card_id\":88,\"word\":\"볼모\",\"meaning\":\"약속 이행의 담보로 상대편에 잡혀 두는 사람이나 물건. 예전에, 나라 사이에 조약 이행을 담보로 상대국에 억류하여 두던 왕자나 그 밖의 유력한 사람.\"},{\"participant_id\":334,\"nickname\":\"나는이해\",\"card_id\":62,\"word\":\"동부레기\",\"meaning\":\"뿔이 날 만한 나이의 송아지.\"}],\"message\":\"All cards have been submitted\"}";
-                JsonConvert.DeserializeObject<WebSocketMessage<object>>(message);
-                GameStatics.State = GameFlowState.EXAMINER_SELECTION;
-                GameStatics.CardList = new CardListResponse
-                {
-                    cards = JsonConvert.DeserializeObject<WebSocketMessage<List<CardData>>>(message).data
-                };
-                GameCanvasManager.Received = true;
-            }));
-            StartCoroutine(Delay(7f, () =>
-            {
-                GameStatics.GetParticipantInfo(1);
-            }));
 #endif
         }
 

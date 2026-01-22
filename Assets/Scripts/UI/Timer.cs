@@ -3,6 +3,8 @@ using System.Collections;
 using Network;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utils;
 
@@ -15,6 +17,7 @@ namespace UI
         public Image timeBar;
         public TextMeshProUGUI timeText;
         public Animator animator;
+        public UnityEvent onTimeOver;
 
         private Coroutine _timer;
 
@@ -44,7 +47,8 @@ namespace UI
                 currentTime -= Time.deltaTime;
                 yield return null;
             }
-            API.TimeOver();
+            onTimeOver.Invoke();
+            API.SubmitCard(null);
             _timer = null;
             gameObject.SetActive(false);
         }

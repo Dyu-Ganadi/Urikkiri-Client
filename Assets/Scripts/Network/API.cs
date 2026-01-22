@@ -24,8 +24,8 @@ namespace Network
         public static Task SubmitCard(Card card)
         {
             return WebSocketClient.Message(GameStatics.IsExaminer()
-                ? new WebSocketRequestMessage<ExaminerSelectRequest>(WebSocketMessageType.EXAMINER_SELECT, GameStatics.RoomCode, ExaminerSelectRequest.From(card.cardData))
-                : new WebSocketRequestMessage<SubmitCardRequest>(WebSocketMessageType.SUBMIT_CARD, GameStatics.RoomCode, SubmitCardRequest.From(card.cardData)));
+                ? new WebSocketRequestMessage<ExaminerSelectRequest>(WebSocketMessageType.EXAMINER_SELECT, GameStatics.RoomCode, !card ? null : ExaminerSelectRequest.From(card.cardData))
+                : new WebSocketRequestMessage<SubmitCardRequest>(WebSocketMessageType.SUBMIT_CARD, GameStatics.RoomCode, !card ? null : SubmitCardRequest.From(card.cardData)));
         }
 
         public static Task ConnectGame(string roomCode)
